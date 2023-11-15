@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -103,6 +104,10 @@ CalendarComponent calendarComponent = new CalendarComponent();
     }
     public RegistrationPage resultTable(String value) {
         resultTable.shouldHave(text(value));
+        return this;
+    }
+    public RegistrationPage resultTableAbsent() {
+        resultTable.shouldNotBe(visible);
         return this;
     }
 }
