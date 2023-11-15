@@ -3,8 +3,6 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -22,23 +20,20 @@ public class RegistrationPage {
     currentAddress = $("#currentAddress"),
     state =$("#state"),
     city =$("#city"),
-    submitButton = $("#submit"),
-    resultTable = $(".table-responsive");
-
-
-
-
-
-
-
+    submitButton = $("#submit");
 
 CalendarComponent calendarComponent = new CalendarComponent();
+
     public RegistrationPage openPage() {
         open("/automation-practice-form");
+        return this;
+    }
+    public RegistrationPage eliminateBanners(){
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
-    }
+    };
+
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
@@ -100,14 +95,6 @@ CalendarComponent calendarComponent = new CalendarComponent();
     }
     public RegistrationPage submitButton() {
         submitButton.click();
-        return this;
-    }
-    public RegistrationPage resultTable(String value) {
-        resultTable.shouldHave(text(value));
-        return this;
-    }
-    public RegistrationPage resultTableAbsent() {
-        resultTable.shouldNotBe(visible);
         return this;
     }
 }
