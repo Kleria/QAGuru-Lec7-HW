@@ -1,18 +1,10 @@
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.TestData;
 import pages.components.ResultComponent;
 
-public class FillInFormWithPOTest {
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "2560x1440";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-    }
-
+public class FillInFormWithPOTest extends tests.TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     ResultComponent resultComponent = new ResultComponent();
     TestData testData = new TestData();
@@ -25,11 +17,11 @@ public class FillInFormWithPOTest {
                 .setFirstName(testData.firstName)
                 .setLastName(testData.lastName)
                 .userEmailInput(testData.userEmail)
-                .genderWrapper(testData.getRandomGender())
+                .genderWrapper(testData.userGender)
                 .userNumber(testData.userPhone)
                 .setDateOfBirth(testData.dayOfBirth, testData.monthOfBirth, testData.yearOfBirth)
-                .hobbiesWrapper(testData.userHobbies())
-                .subjectsInput(testData.userSubject())
+                .hobbiesWrapper(testData.userHobbies)
+                .subjectsInput(testData.userSubject)
                 .uploadPicture("Cat.jpg")
                 .currentAddress(testData.userAddress)
                 .state(testData.userState)
@@ -39,10 +31,10 @@ public class FillInFormWithPOTest {
                 .checkResult(testData.firstName + " " + testData.lastName)
                 .checkResult(testData.userEmail)
                 .checkResult(testData.userPhone)
-                .checkResult(testData.getRandomGender())
+                .checkResult(testData.userGender)
                 .checkResult(testData.dayOfBirth + " " + testData.monthOfBirth + "," + testData.yearOfBirth)
-                .checkResult(testData.userHobbies())
-                .checkResult(testData.userSubject())
+                .checkResult(testData.userHobbies)
+                .checkResult(testData.userSubject)
                 .checkResult("Cat.jpg")
                 .checkResult(testData.userAddress)
                 .checkResult(testData.userState)
@@ -55,16 +47,16 @@ public class FillInFormWithPOTest {
                 .eliminateBanners()
                 .setFirstName(testData.firstName)
                 .setLastName(testData.lastName)
-                .genderWrapper(testData.getRandomGender())
+                .genderWrapper(testData.userGender)
                 .userNumber(testData.userPhone)
-                .hobbiesWrapper(testData.userHobbies())
+                .hobbiesWrapper(testData.userHobbies)
                 .currentAddress(testData.userAddress)
                 .submitButton();
         resultComponent
-                .checkResult(testData.firstName + testData.lastName)
-                .checkResult(testData.getRandomGender())
+                .checkResult(testData.firstName + " " +testData.lastName)
+                .checkResult(testData.userGender)
                 .checkResult(testData.userPhone)
-                .checkResult(testData.userHobbies())
+                .checkResult(testData.userHobbies)
                 .checkResult(testData.userAddress);
     }
     @Test
@@ -73,8 +65,8 @@ public class FillInFormWithPOTest {
                 .eliminateBanners()
                 .setFirstName(testData.firstName)
                 .setLastName(testData.lastName)
-                .genderWrapper(testData.getRandomGender())
-                .hobbiesWrapper(testData.userHobbies())
+                .genderWrapper(testData.userGender)
+                .hobbiesWrapper(testData.userHobbies)
                 .currentAddress(testData.userAddress)
                 .submitButton();
         resultComponent.tableNotAvailable();

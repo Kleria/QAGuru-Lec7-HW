@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TestData {
-    static Faker faker = new Faker(new Locale("en-GB"));
+    Faker faker = new Faker(new Locale("en"));
 
     public String firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
@@ -15,32 +15,15 @@ public class TestData {
             userCity = getRandomCity(userState),
             dayOfBirth = String.format("%02d", faker.number().numberBetween(1, 28)),
             monthOfBirth = faker.options().option("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"),
-            yearOfBirth = String.valueOf(faker.number().numberBetween(1960, 1999));
+            yearOfBirth = String.valueOf(faker.number().numberBetween(1960, 1999)),
+            userGender = faker.options().option("Male", "Female", "Other"),
+            userHobbies = faker.options().option("Sports", "Reading", "Music"),
+            userSubject = faker.options().option("Maths", "English", "Physics", "Chemistry", "Computer Science", "Commerce",
+                    "Economics", "Arts", "Social Studies", "History", "Civics", "Accounting", "Biology", "Hindi")
+    ;
 
-    public static int getRandomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-    }
-    public static String getRandomItemFromArray(String[] array) {
-        int index = getRandomInt(0, array.length - 1);
-        return array[index];
-    }
-
-    public String getRandomGender() {
-        String[] genders = {"Male", "Female", "Other"};
-        return getRandomItemFromArray(genders);
-    };
-
-    public String userHobbies() {
-        String[] hobbies = {"Sports", "Reading", "Music"};
-        return getRandomItemFromArray(hobbies);
-    };
-
-    public String userSubject() {
-        String[] subjects = {"Maths", "English", "Physics", "Chemistry", "Computer Science", "Commerce",
-                "Economics", "Arts", "Social Studies", "History", "Civics", "Accounting", "Biology", "Hindi"};
-        return getRandomItemFromArray(subjects);
-    };
-    public static String getRandomCity(String userState) {
+    ;
+    public String getRandomCity(String userState) {
         switch (userState) {
             case "NCR":
                 return faker.options().option("Delhi", "Gurgaon", "Noida");
@@ -54,5 +37,5 @@ public class TestData {
                 return userState;
         }
 
-    // birth,  city
+
 }}
